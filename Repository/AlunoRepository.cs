@@ -1,5 +1,7 @@
 ﻿using PrimeiraAPI.Interfaces;
 using PrimeiraAPI.Models;
+using System.Data;
+using Dapper;
 
 namespace PrimeiraAPI.Repository
 {
@@ -7,10 +9,14 @@ namespace PrimeiraAPI.Repository
 	{
 		public IList<Aluno> listaAluno { get; set; }
 
-        public AlunoRepository()
+		private readonly IDbConnection _connection;
+
+        public AlunoRepository(IDbConnection dbConnection)
         {
             listaAluno = new List<Aluno>();
-        }
+			_connection = dbConnection;
+
+		}
 
         public void AtualizeAluno(Aluno dadosAluno)
 		{

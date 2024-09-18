@@ -1,20 +1,26 @@
+using Microsoft.Data.SqlClient;
 using PrimeiraAPI.Interfaces;
 using PrimeiraAPI.Logging;
 using PrimeiraAPI.Middlewares;
 using PrimeiraAPI.Repository;
 using PrimeiraAPI.Services;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddSingleton<IAlunoCadastro, AlunoRepository>();
+
+var stringConexao = configuration.GetValue<string>("ConnectionStringSQL");
+builder.Services.AddScoped<IDbConnection>((conexao) => new SqlConnection(stringConexao));
+
 
 builder.Logging.ClearProviders();
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
