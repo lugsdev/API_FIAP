@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
-builder.Services.AddSingleton<IAlunoCadastro, AlunoRepository>();
+builder.Services.AddScoped<IUsuarioCadastro, UsuarioRepository>();
 
 var stringConexao = configuration.GetValue<string>("ConnectionStringSQL");
 builder.Services.AddScoped<IDbConnection>((conexao) => new SqlConnection(stringConexao));

@@ -14,6 +14,8 @@ namespace PrimeiraAPI.Controllers
 
 		private readonly ITokenService _tokenService;
 
+		private readonly IUsuarioCadastro _usuarioCadastro;
+
 		public TokenController(ITokenService tokenService, ILogger<TokenController> logger)
 		{
 			_tokenService = tokenService;
@@ -32,6 +34,12 @@ namespace PrimeiraAPI.Controllers
 				
 			}
 			return Unauthorized();
+		}
+
+		[HttpGet]
+		public IActionResult Get() 
+		{
+			return Ok(_usuarioCadastro.ListarUsuario());
 		}
 	}
 }
