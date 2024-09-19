@@ -16,9 +16,11 @@ namespace PrimeiraAPI.Controllers
 
 		private readonly IUsuarioCadastro _usuarioCadastro;
 
-		public TokenController(ITokenService tokenService, ILogger<TokenController> logger)
+
+		public TokenController(ITokenService tokenService, IUsuarioCadastro usuarioCadastro, ILogger<TokenController> logger)
 		{
 			_tokenService = tokenService;
+			_usuarioCadastro = usuarioCadastro;
 			_logger = logger;
 		}
 
