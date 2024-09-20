@@ -39,9 +39,21 @@ namespace PrimeiraAPI.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Get() 
+		public IActionResult Get()
 		{
 			return Ok(_usuarioCadastro.ListarUsuario());
+		}
+
+		[HttpGet("GetById/{id}")]
+		public IActionResult Get(int id)
+		{
+			return Ok(_usuarioCadastro.ListarUsuarioPorId(id));
+		}
+
+		[HttpPut]
+		public IActionResult Put(Usuario usuario)
+		{
+			return Ok(_usuarioCadastro.CriarUsuario(usuario));
 		}
 	}
 }

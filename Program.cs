@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 //middleware com usuário para test
-app.UseListaMemoriaMiddleware();
+//app.UseListaMemoriaMiddleware();
 
 app.UseHttpsRedirection();
 
