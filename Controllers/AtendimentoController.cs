@@ -19,6 +19,10 @@ namespace PrimeiraAPI.Controllers
 			_logger = logger;
         }
 
+		/// <summary>
+		/// Método responsável por retornar lista dos alunos cadastros no banco de dados.
+		/// </summary>
+		/// <returns>Retorna lista de objetos do tipo Aluno.</returns>
         [HttpGet("aluno")]
 		public IActionResult GetAlunos()
 		{

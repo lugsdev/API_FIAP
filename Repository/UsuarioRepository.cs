@@ -32,7 +32,13 @@ namespace PrimeiraAPI.Repository
             var comandoSql = @"SELECT * FROM USUARIO";
             return _dbConnection.Query<Usuario>(comandoSql).ToList();
         }
-
+        
+        /// <summary>
+        /// Método responsável por retornar as informações de um usuário
+        /// com base no seu ID de cadastro
+        /// </summary>
+        /// <param name="id">Id do usuário cadastrado na base</param>
+        /// <returns>Retorna um objeto do tipo Usuario com as informações cadastradas no banco de dados</returns>
 		public Usuario? ListarUsuarioPorId(int id)
 		{
 			var comandoSql = @"SELECT * FROM USUARIO WHERE ID = @ID";
