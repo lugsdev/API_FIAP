@@ -28,6 +28,8 @@ var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").B
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddScoped<IUsuarioCadastro, UsuarioRepository>();
+builder.Services.AddScoped<IAlunoCadastro, AlunoRepository>();
+
 
 var stringConexao = configuration.GetValue<string>("ConnectionStringSQL");
 builder.Services.AddScoped<IDbConnection>((conexao) => new SqlConnection(stringConexao));
