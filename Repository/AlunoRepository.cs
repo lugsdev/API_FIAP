@@ -33,13 +33,11 @@ namespace PrimeiraAPI.Repository
 
 		public Aluno CriarAluno(Aluno dadosAluno)
 		{
-			//dadosAluno.Id = listaAluno.Select(x => x.Id).Any() ? listaAluno.Select(x => x.Id).Max() + 1 : 1;
-			//listaAluno.Add(dadosAluno);
+			dadosAluno.Id = Guid.NewGuid();
 
 			var comandoSql = @"INSERT INTO ALUNO (ID, NOME, IDADE, ENDERECO) 
                                              VALUES (@ID, @NOME, @IDADE, @ENDERECO)";
 			var novoAluno = _dbConnection.Query(comandoSql, dadosAluno);
-			dadosAluno.Id = new Guid();
 
 			return dadosAluno;
 		}
