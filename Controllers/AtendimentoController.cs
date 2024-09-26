@@ -34,7 +34,7 @@ namespace PrimeiraAPI.Controllers
 		public IActionResult CriarAlunos(Aluno dadosAluno)
 		{
 			_alunoCadastro.CriarAluno(dadosAluno);
-			_logger.LogInformation($"Cadastrou aluno. Código: {dadosAluno.Id}");
+			_logger.LogInformation($"Cadastrou aluno. Código: {dadosAluno.Codigo}");
 			return Ok(dadosAluno);
 		}
 
@@ -42,15 +42,15 @@ namespace PrimeiraAPI.Controllers
 		public IActionResult PutAtualizeAlunos(Aluno dadosAluno)
 		{
 			_alunoCadastro.AtualizeAluno(dadosAluno);
-			_logger.LogInformation($"Atualizou aluno. Código: {dadosAluno.Id}");
-			return Ok();
+			_logger.LogInformation($"Atualizou aluno. Código: {dadosAluno.Codigo}");
+			return Ok(dadosAluno);
 		}
 
 		[HttpDelete("DeleteAluno")]
-		public IActionResult DeleteAlunos(int Id)
+		public IActionResult DeleteAlunos(int codigo)
 		{
-			_alunoCadastro.DeleteAluno(Id);
-			_logger.LogInformation($"Excluiu aluno.");
+			_alunoCadastro.DeleteAluno(codigo);
+			_logger.LogInformation($"Excluiu aluno. Código: {codigo}");
 			return Ok();
 		}
 

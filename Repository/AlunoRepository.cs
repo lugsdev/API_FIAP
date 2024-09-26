@@ -19,19 +19,10 @@ namespace PrimeiraAPI.Repository
 
         public Aluno AtualizeAluno(Aluno dadosAluno)
 		{
-			//var _atualizeAluno = listaAluno.SingleOrDefault(x => x.Id == dadosAluno.Id);
-
-			//_atualizeAluno!.Nome = dadosAluno.Nome;
-			//_atualizeAluno.Idade = dadosAluno.Idade;
-			//_atualizeAluno.Endereco = dadosAluno.Endereco;
 
 			//if(dadosAluno.Id is null)
 
-			var comandoSql = $@"UPDATE ALUNO SET NOME = {dadosAluno.Nome}, 
-												 CODIGO = {dadosAluno.Codigo},
-												 IDADE = {dadosAluno.Idade}, 
-												 ENDERECO = {dadosAluno.Endereco}
-									       WHERE ID = {dadosAluno.Id}";
+			var comandoSql = $@"UPDATE ALUNO SET NOME = @NOME, IDADE = @IDADE, ENDERECO = @ENDERECO WHERE CODIGO = {dadosAluno.Codigo}";
 
 			var novoAluno = _dbConnection.Query(comandoSql, dadosAluno);
 
