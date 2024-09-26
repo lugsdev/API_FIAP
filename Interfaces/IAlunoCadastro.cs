@@ -8,7 +8,7 @@ namespace PrimeiraAPI.Interfaces
 
 		public IList<Aluno> ListarAlunos();
 		public Aluno CriarAluno(Aluno dadosAluno);
-		public void AtualizeAluno(Aluno dadosAluno);
+		public Aluno AtualizeAluno(Aluno dadosAluno);
 		public void DeleteAluno(int Id);
 
 

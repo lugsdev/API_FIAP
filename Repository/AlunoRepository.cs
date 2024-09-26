@@ -17,7 +17,7 @@ namespace PrimeiraAPI.Repository
 			_dbConnection = dbConnection;
 		}
 
-        public void AtualizeAluno(Aluno dadosAluno)
+        public Aluno AtualizeAluno(Aluno dadosAluno)
 		{
 			//var _atualizeAluno = listaAluno.SingleOrDefault(x => x.Id == dadosAluno.Id);
 
@@ -25,18 +25,30 @@ namespace PrimeiraAPI.Repository
 			//_atualizeAluno.Idade = dadosAluno.Idade;
 			//_atualizeAluno.Endereco = dadosAluno.Endereco;
 
-			var comandoSql = $@"UPDATE ALUNO SET @NOME = {dadosAluno.Nome}, 
-												 @IDADE = {dadosAluno.Idade}, 
-												 @ENDERECO = {dadosAluno.Endereco}
-											 WHERE @ID = {dadosAluno.Id}";
+			//if(dadosAluno.Id is null)
+
+			var comandoSql = $@"UPDATE ALUNO SET NOME = {dadosAluno.Nome}, 
+												 CODIGO = {dadosAluno.Codigo},
+												 IDADE = {dadosAluno.Idade}, 
+												 ENDERECO = {dadosAluno.Endereco}
+									       WHERE ID = {dadosAluno.Id}";
+
+			var novoAluno = _dbConnection.Query(comandoSql, dadosAluno);
+
+			return dadosAluno;
 		}
 
 		public Aluno CriarAluno(Aluno dadosAluno)
 		{
 			dadosAluno.Id = Guid.NewGuid();
 
-			var comandoSql = @"INSERT INTO ALUNO (ID, NOME, IDADE, ENDERECO) 
-                                             VALUES (@ID, @NOME, @IDADE, @ENDERECO)";
+			var ultimoCodigo = @"SELECT TOP (1) CODIGO FROM ALUNO ORDER BY CODIGO DESC";
+			var retornaUltimoCodigo = _dbConnection.Query<int>(ultimoCodigo).FirstOrDefault();
+
+			dadosAluno.Codigo = retornaUltimoCodigo + 1;
+
+			var comandoSql = $@"INSERT INTO ALUNO (ID, CODIGO, NOME, IDADE, ENDERECO) 
+                                             VALUES (@ID, @CODIGO, @NOME, @IDADE, @ENDERECO)";
 			var novoAluno = _dbConnection.Query(comandoSql, dadosAluno);
 
 			return dadosAluno;
