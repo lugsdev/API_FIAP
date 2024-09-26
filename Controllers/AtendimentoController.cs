@@ -51,7 +51,7 @@ namespace PrimeiraAPI.Controllers
 		{
 			_alunoCadastro.DeleteAluno(codigo);
 			_logger.LogInformation($"Excluiu aluno. Código: {codigo}");
-			return Ok();
+			return Ok("Registro excluído com Sucesso.");
 		}
 
 	}

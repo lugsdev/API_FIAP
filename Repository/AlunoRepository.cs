@@ -7,23 +7,17 @@ namespace PrimeiraAPI.Repository
 {
 	public class AlunoRepository : IAlunoCadastro
 	{
-		//public IList<Aluno> listaAluno { get; set; }
-
 		private readonly IDbConnection _dbConnection;
 
         public AlunoRepository(IDbConnection dbConnection)
         {
-            //listaAluno = new List<Aluno>();
 			_dbConnection = dbConnection;
 		}
 
         public Aluno AtualizeAluno(Aluno dadosAluno)
 		{
-
-			//if(dadosAluno.Id is null)
-
-			var comandoSql = $@"UPDATE ALUNO SET NOME = @NOME, IDADE = @IDADE, ENDERECO = @ENDERECO WHERE CODIGO = {dadosAluno.Codigo}";
-
+			var comandoSql = $@"UPDATE ALUNO SET NOME = @NOME, IDADE = @IDADE, ENDERECO = @ENDERECO 
+																WHERE CODIGO = {dadosAluno.Codigo}";
 			var novoAluno = _dbConnection.Query(comandoSql, dadosAluno);
 
 			return dadosAluno;
@@ -39,19 +33,16 @@ namespace PrimeiraAPI.Repository
 			dadosAluno.Codigo = retornaUltimoCodigo + 1;
 
 			var comandoSql = $@"INSERT INTO ALUNO (ID, CODIGO, NOME, IDADE, ENDERECO) 
-                                             VALUES (@ID, @CODIGO, @NOME, @IDADE, @ENDERECO)";
+                                      VALUES (@ID, @CODIGO, @NOME, @IDADE, @ENDERECO)";
 			var novoAluno = _dbConnection.Query(comandoSql, dadosAluno);
 
 			return dadosAluno;
 		}
 
-		public void DeleteAluno(int Id)
+		public void DeleteAluno(int codigo)
 		{
-			//var _deleteAluno = listaAluno.SingleOrDefault(x => x.Id == Id);
-
-			//if (_deleteAluno != null)
-
-			//listaAluno.Remove(_deleteAluno);
+			var comandoSql = $@"DELETE FROM ALUNO WHERE CODIGO = {codigo}";
+			var removeAluno = _dbConnection.Query(comandoSql);
 
 		}
 
